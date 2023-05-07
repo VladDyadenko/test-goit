@@ -2,11 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addDisplayedItems } from "../../Redux/operetions";
 import Follower from "./Follower";
 import { LoadButton, UserContainer } from "./FollowerCard.stayled";
-import { selectItemsPerPage, selectCurrentPage } from "../../Redux/selectors";
+import {selectDisplayedItems } from "../../Redux/selectors";
 
 const FollowerCard = ({ followers }) => {
-  const itemsPage = useSelector(selectItemsPerPage);
-  const currentPage = useSelector(selectCurrentPage);
+  
+  const disolayPage = useSelector(selectDisplayedItems)
 
   const dispatch = useDispatch();
 
@@ -14,12 +14,10 @@ const FollowerCard = ({ followers }) => {
     dispatch(addDisplayedItems());
   };
 
-  const displayedFollowers = followers.slice(0, currentPage * itemsPage);
-
   return (
     <>
       <UserContainer>
-        {displayedFollowers.map(
+        {disolayPage?.map(
           ({ id, avatar, followers, tweets, isFollower }) => (
             <Follower
               key={id}
@@ -32,7 +30,7 @@ const FollowerCard = ({ followers }) => {
           )
         )}
       </UserContainer>
-      {displayedFollowers.length < followers.length && (
+      {disolayPage.length < followers.length && (
         <LoadButton variant="contained" onClick={handleShowMore}>
           Load More
         </LoadButton>

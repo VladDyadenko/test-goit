@@ -1,9 +1,8 @@
-import { BoxLoader, LoaderSpiner } from './Loader.styled';
+import { BoxLoader, LoaderSpiner } from "./Loader.styled";
 
 const Loader = () => {
   return (
     <BoxLoader>
-    
       <LoaderSpiner
         visible={true}
         color="#006400"

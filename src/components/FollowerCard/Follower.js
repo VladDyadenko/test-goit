@@ -16,7 +16,6 @@ import Logo from "../../assets/images/Logo.png";
 import { addFollower, deleteFollower } from "../../Redux/operetions";
 
 const Follower = ({ id, avatar, followers, tweets, isFollower }) => {
-    
   const dispatch = useDispatch();
 
   return (

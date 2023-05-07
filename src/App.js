@@ -13,9 +13,7 @@ function App() {
   const operetion = useSelector(selectOperetion);
 
   useEffect(() => {
-    const userFromStorage = JSON.parse(
-      localStorage.getItem("persist:root")
-    );
+    const userFromStorage = JSON.parse(localStorage.getItem("persist:root"));
 
     if (userFromStorage === null) {
       dispatch(fetchContacts());
@@ -23,16 +21,19 @@ function App() {
   }, [dispatch]);
 
   return (
-    <> {operetion ? (
-      <Loader/>
-    ) :
-      (<Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="/followers" element={<Followers />} />
-          <Route path="*" element={<Home />} />
-        </Route>
-      </Routes>)}
+    <>
+      {" "}
+      {operetion ? (
+        <Loader />
+      ) : (
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/followers" element={<Followers />} />
+            <Route path="*" element={<Home />} />
+          </Route>
+        </Routes>
+      )}
     </>
   );
 }

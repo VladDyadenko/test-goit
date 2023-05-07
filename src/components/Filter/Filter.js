@@ -8,38 +8,62 @@ import {
 } from "./Filter.styled";
 import { BsFillRewindFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setDisplayedItems, setFilter } from "../../Redux/slise";
 
 function Filter({ followers }) {
   const all = followers.length;
-  const follow = followers.filter((item) => item.isFollower === true);
-  const followings = followers.filter((item) => item.isFollower === false);
+  const follow = followers.filter((item) => item.isFollower === false);
+  const followings = followers.filter((item) => item.isFollower === true);
 
   const navigate = useNavigate();
   const onGoHome = () => navigate("/");
 
+  const dispatch = useDispatch();
+
+  const handleAllClick = () => {
+    dispatch(setFilter("all"));
+    const displayedItems = followers;
+
+    dispatch(setDisplayedItems(displayedItems));
+  };
+
+  const handleFollowingsClick = () => {
+    dispatch(setFilter("followings"));
+    const displayedItems = followers.filter((item) => item.isFollower);
+
+    dispatch(setDisplayedItems(displayedItems));
+  };
+
+  const handleFollowClick = () => {
+    dispatch(setFilter("follow"));
+    const displayedItems = followers.filter((item) => !item.isFollower);
+
+    dispatch(setDisplayedItems(displayedItems));
+  };
   return (
     <>
       <Wrapper>
         <Container>
-          <Text variant="h5" component="h3">
+          <Button onClick={handleAllClick} variant="contained">
             All
-          </Text>
+          </Button>
           <Text variant="h5" component="h3">
             {all}
           </Text>
         </Container>
         <Container>
-          <Text variant="h5" component="h3">
+          <Button onClick={handleFollowClick} variant="contained">
             Follow
-          </Text>
+          </Button>
           <Text variant="h5" component="h3">
             {follow.length}
           </Text>
         </Container>
         <Container>
-          <Text variant="h5" component="h3">
+          <Button onClick={handleFollowingsClick} variant="contained">
             Followings
-          </Text>
+          </Button>
           <Text variant="h5" component="h3">
             {followings.length}
           </Text>
@@ -48,7 +72,7 @@ function Filter({ followers }) {
       <WrapperBtn>
         <ButtonContainer>
           <Button onClick={onGoHome} variant="contained">
-            <BsFillRewindFill style={{ marginRight: '10px' }}/>  Back to Home
+            <BsFillRewindFill style={{ marginRight: "10px" }} /> Back to Home
           </Button>
         </ButtonContainer>
       </WrapperBtn>

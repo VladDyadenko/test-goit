@@ -6,7 +6,6 @@ import Filter from "../../components/Filter/Filter";
 const Followers = () => {
   const followers = useSelector(selectContacts);
 
-
   return (
     <>
       <Filter followers={followers} />

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
 
 export const Wrapper = styled(Box)`
-   width: 300px;
+  width: 400px;
   margin-top: 80px;
   margin-left: auto;
   margin-right: auto;
@@ -24,7 +24,7 @@ export const Container = styled(Box)`
   padding: 0 10px;
 `;
 export const Text = styled(Typography)`
-  color: #800080;
+  color: #ffff00;
   font-family: "Montserrat";
 `;
 export const ButtonContainer = styled(Box)`
@@ -45,7 +45,7 @@ export const WrapperBtn = styled(Box)`
   border-radius: 15px;
   position: sticky;
   left: 0;
-  top: 30%;
+  top: 35%;
   transform: translateY(-50%);
   z-index: 111;
 `;

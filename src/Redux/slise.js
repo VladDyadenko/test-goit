@@ -15,13 +15,25 @@ const followerInitialState = {
     itemsPerPage: 3,
     currentPage: 1,
     totalPages: 0,
+    filter: "all",
   },
 };
 
 const followerSlice = createSlice({
   name: "tweets",
   initialState: followerInitialState,
-  reducers: {},
+  reducers: {
+    setFilter: {
+      reducer: (state, { payload }) => {
+        state.filter = payload;
+      },
+    },
+    setDisplayedItems: {
+      reducer: (state, { payload }) => {
+        state.displayedItems = payload;
+      },
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchContacts.pending, (state) => {
@@ -82,3 +94,4 @@ const followerSlice = createSlice({
 });
 
 export const followerReduser = followerSlice.reducer;
+export const { setFilter, setDisplayedItems } = followerSlice.actions;
