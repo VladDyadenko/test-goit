@@ -30,7 +30,7 @@ const layout = () => {
           </Toolbar>
         </HeaderNav>
       </HeaderBox>
-      <Suspense>
+      <Suspense fallback={<div>Завантажуєм...</div>} >
         <Outlet />
       </Suspense>
     </>

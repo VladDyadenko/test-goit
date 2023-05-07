@@ -13,6 +13,7 @@ export const HomeBox = styled(Box)`
 `;
 export const HomeDescr = styled(Typography)`
   font-weight: 500;
+  font-family: "Montserrat";
   font-size: 25px;
   padding: 0 15px;
 

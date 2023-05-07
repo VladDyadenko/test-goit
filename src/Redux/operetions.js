@@ -24,9 +24,6 @@ export const addDisplayedItems = createAsyncThunk(
   async (_, { getState }) => {
     try {
       const { currentPage, itemsPerPage } = getState().follower;
-      console.log(currentPage);
-      console.log(itemsPerPage);
-      console.log(getState().follower);
 
       const start = currentPage * itemsPerPage;
       const end = start + itemsPerPage;
