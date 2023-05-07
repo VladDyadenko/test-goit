@@ -2,8 +2,7 @@ import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
 
 export const Wrapper = styled(Box)`
-  width: 300px;
-  height: 100px;
+   width: 300px;
   margin-top: 80px;
   margin-left: auto;
   margin-right: auto;
@@ -27,4 +26,26 @@ export const Container = styled(Box)`
 export const Text = styled(Typography)`
   color: #800080;
   font-family: "Montserrat";
+`;
+export const ButtonContainer = styled(Box)`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export const WrapperBtn = styled(Box)`
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 15px;
+  position: sticky;
+  left: 0;
+  top: 30%;
+  transform: translateY(-50%);
+  z-index: 111;
 `;
