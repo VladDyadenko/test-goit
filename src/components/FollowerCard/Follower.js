@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   AbstractionImg,
   BtnWrapper,
@@ -14,43 +14,57 @@ import {
 import imagCardHeader from "../../assets/images/imagCardHeader.png";
 import Logo from "../../assets/images/Logo.png";
 import { addFollower, deleteFollower } from "../../Redux/operetions";
+import { selectContacts } from "../../Redux/selectors";
+import { setDisplayedItems } from "../../Redux/slise";
 
 const Follower = ({ id, avatar, followers, tweets, isFollower }) => {
   const dispatch = useDispatch();
 
+  const follower = useSelector(selectContacts);
+
   return (
-    <Item>
-      <FollowerCardBox>
-        <LogoImg src={Logo} alt="Logo" />
-        <AbstractionImg src={imagCardHeader} alt="abstraction" />
-        <Line />
-        <UserImg src={avatar} alt="User"></UserImg>
-        <TweetsDescr>{tweets} tweets</TweetsDescr>
-        <FollowersDescr>
-          {followers.toLocaleString("en-US")} FOLLOWERS
-        </FollowersDescr>
-        <BtnWrapper>
-          <FollowerBtn
-            sx={{
-              background: isFollower ? "#5cd3a8" : "#ebd8ff",
-              "&:hover": {
+    <>
+      <Item>
+        <FollowerCardBox>
+          <LogoImg src={Logo} alt="Logo" />
+          <AbstractionImg src={imagCardHeader} alt="abstraction" />
+          <Line />
+          <UserImg src={avatar} alt="User"></UserImg>
+          <TweetsDescr>{tweets} tweets</TweetsDescr>
+          <FollowersDescr>
+            {followers.toLocaleString("en-US")} FOLLOWERS
+          </FollowersDescr>
+          <BtnWrapper>
+            <FollowerBtn
+              sx={{
                 background: isFollower ? "#5cd3a8" : "#ebd8ff",
-              },
-            }}
-            variant="contained"
-            onClick={() => {
-              if (isFollower) {
-                dispatch(deleteFollower(id));
-              } else {
-                dispatch(addFollower(id));
-              }
-            }}
-          >
-            {isFollower ? "Following" : "Follow"}
-          </FollowerBtn>
-        </BtnWrapper>
-      </FollowerCardBox>
-    </Item>
+                "&:hover": {
+                  background: isFollower ? "#5cd3a8" : "#ebd8ff",
+                },
+              }}
+              variant="contained"
+              onClick={() => {
+                if (isFollower) {
+                  dispatch(deleteFollower(id));
+                  const displayedItems = follower.filter(
+                    (item) => item.id !== id
+                  );
+                  dispatch(setDisplayedItems(displayedItems));
+                } else {
+                  dispatch(addFollower(id));
+                  const displayedItems = follower.filter(
+                    (item) => item.id !== id
+                  );
+                  dispatch(setDisplayedItems(displayedItems));
+                }
+              }}
+            >
+              {isFollower ? "Following" : "Follow"}
+            </FollowerBtn>
+          </BtnWrapper>
+        </FollowerCardBox>
+      </Item>
+    </>
   );
 };
 export default Follower;

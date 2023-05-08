@@ -1,3 +1,6 @@
+import { GrTwitter } from "react-icons/gr";
+import { Outlet } from "react-router-dom";
+import { Suspense } from "react";
 import { Toolbar } from "@mui/material";
 import {
   HeaderBox,
@@ -6,9 +9,6 @@ import {
   HeaderTitle,
   LinkHeader,
 } from "./layout.styled";
-import { GrTwitter } from "react-icons/gr";
-import { Outlet } from "react-router-dom";
-import { Suspense } from "react";
 
 const layout = () => {
   const svgTwitter = { fill: "#1D9BF0", marginRight: "10px" };

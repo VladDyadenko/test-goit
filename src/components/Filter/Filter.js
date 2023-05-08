@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Button } from "@mui/material";
+import { BsFillRewindFill } from "react-icons/bs";
 import {
   ButtonContainer,
   Container,
@@ -6,20 +9,17 @@ import {
   Wrapper,
   WrapperBtn,
 } from "./Filter.styled";
-import { BsFillRewindFill } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { setDisplayedItems, setFilter } from "../../Redux/slise";
 
 function Filter({ followers }) {
-  const all = followers.length;
-  const follow = followers.filter((item) => item.isFollower === false);
-  const followings = followers.filter((item) => item.isFollower === true);
-
   const navigate = useNavigate();
   const onGoHome = () => navigate("/");
 
   const dispatch = useDispatch();
+
+  const all = followers.length;
+  const follow = followers.filter((item) => item.isFollower === false);
+  const followings = followers.filter((item) => item.isFollower === true);
 
   const handleAllClick = () => {
     dispatch(setFilter("all"));
