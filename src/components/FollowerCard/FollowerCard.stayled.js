@@ -100,6 +100,10 @@ export const UserContainer = styled.ul`
   margin: 0;
   padding-left: 0;
   list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 1em;
 `;
 export const LoadButton = styled(Button)`
   margin: 15px auto;

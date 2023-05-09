@@ -70,6 +70,7 @@ const followerSlice = createSlice({
           state.follower.items[index].followers -= 1;
           state.follower.items[index].isFollower = false;
         }
+        state.displayedItems = state.follower.items;
       })
       .addCase(deleteFollower.rejected, (state, { payload }) => {
         state.operetion = false;
@@ -85,6 +86,7 @@ const followerSlice = createSlice({
           state.follower.items[index].followers += 1;
           state.follower.items[index].isFollower = true;
         }
+        state.displayedItems = state.follower.items;
       })
       .addCase(addFollower.rejected, (state, { payload }) => {
         state.operetion = false;

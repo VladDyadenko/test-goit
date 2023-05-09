@@ -13,8 +13,8 @@ export const Wrapper = styled(Box)`
   align-items: center;
   border-radius: 15px;
   position: sticky;
-  left: 0;
-  top: 20%;
+  left: auto;
+  top: 120px;
   transform: translateY(-50%);
   z-index: 111;
 `;
@@ -43,9 +43,9 @@ export const WrapperBtn = styled(Box)`
   justify-content: space-between;
   align-items: center;
   border-radius: 15px;
-  position: sticky;
-  left: 0;
-  top: 35%;
+  position: fixed;
+  left: auto;
+  top: 100px;
   transform: translateY(-50%);
   z-index: 111;
 `;

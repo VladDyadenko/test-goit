@@ -15,7 +15,7 @@ import imagCardHeader from "../../assets/images/imagCardHeader.png";
 import Logo from "../../assets/images/Logo.png";
 import { addFollower, deleteFollower } from "../../Redux/operetions";
 import { selectContacts } from "../../Redux/selectors";
-import { setDisplayedItems } from "../../Redux/slise";
+import { setDisplayedItems, setFilter } from "../../Redux/slise";
 
 const Follower = ({ id, avatar, followers, tweets, isFollower }) => {
   const dispatch = useDispatch();
@@ -45,12 +45,14 @@ const Follower = ({ id, avatar, followers, tweets, isFollower }) => {
               variant="contained"
               onClick={() => {
                 if (isFollower) {
+                  dispatch(setFilter("all"));
                   dispatch(deleteFollower(id));
                   const displayedItems = follower.filter(
                     (item) => item.id !== id
                   );
                   dispatch(setDisplayedItems(displayedItems));
                 } else {
+                  dispatch(setFilter("all"));
                   dispatch(addFollower(id));
                   const displayedItems = follower.filter(
                     (item) => item.id !== id

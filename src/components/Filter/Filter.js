@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@mui/material";
 import { BsFillRewindFill } from "react-icons/bs";
 import {
@@ -10,8 +10,11 @@ import {
   WrapperBtn,
 } from "./Filter.styled";
 import { setDisplayedItems, setFilter } from "../../Redux/slise";
+import { selectFilter } from "../../Redux/selectors";
 
 function Filter({ followers }) {
+  const filter = useSelector(selectFilter);
+
   const navigate = useNavigate();
   const onGoHome = () => navigate("/");
 
@@ -45,7 +48,14 @@ function Filter({ followers }) {
     <>
       <Wrapper>
         <Container>
-          <Button onClick={handleAllClick} variant="contained">
+          <Button
+            onClick={handleAllClick}
+            variant="contained"
+            sx={{
+              color:
+                filter === "all" || filter === undefined ? "#00ff00" : "#fff",
+            }}
+          >
             All
           </Button>
           <Text variant="h5" component="h3">
@@ -53,7 +63,11 @@ function Filter({ followers }) {
           </Text>
         </Container>
         <Container>
-          <Button onClick={handleFollowClick} variant="contained">
+          <Button
+            onClick={handleFollowClick}
+            variant="contained"
+            sx={{ color: filter === "follow" ? "#00ff00" : "#fff" }}
+          >
             Follow
           </Button>
           <Text variant="h5" component="h3">
@@ -61,7 +75,11 @@ function Filter({ followers }) {
           </Text>
         </Container>
         <Container>
-          <Button onClick={handleFollowingsClick} variant="contained">
+          <Button
+            onClick={handleFollowingsClick}
+            variant="contained"
+            sx={{ color: filter === "followings" ? "#00ff00" : "#fff" }}
+          >
             Followings
           </Button>
           <Text variant="h5" component="h3">
