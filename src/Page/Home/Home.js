@@ -6,11 +6,10 @@ const Home = () => {
     <HomeBox>
       <HomeImg src={Twetter} alt="img" />
       <HomeDescr>
-        До Вашої уваги представляється тестова робота з React. За створення цієї
-        роботи хочу подякувати всіх, хто мене вчив - лектори, ментори,
-        адміністратори та всі інші, надихав та не заважав працювати - кохана
-        дружина та діти. Ну і звичайно без ChatGPT ця робота виконувалась-би
-        набагато довше. З повагою до всіх Vladimir Dyadenko.
+        Test work with React is brought to your attention. For creating this
+        work, I want to thank everyone who taught me - lecturers, mentors,
+        administrators and all others, inspired and did not interfere with work
+        - beloved wife and children. Sincerely, Vladimir Dyadenko.
       </HomeDescr>
     </HomeBox>
   );

@@ -14,13 +14,13 @@ import {
 import imagCardHeader from "../../assets/images/imagCardHeader.png";
 import Logo from "../../assets/images/Logo.png";
 import { addFollower, deleteFollower } from "../../Redux/operetions";
-import { selectContacts } from "../../Redux/selectors";
-import { setDisplayedItems, setFilter } from "../../Redux/slise";
+import { selectOperetion } from "../../Redux/selectors";
+import { setFilter } from "../../Redux/slise";
+import { RotatingLines } from "react-loader-spinner";
 
 const Follower = ({ id, avatar, followers, tweets, isFollower }) => {
   const dispatch = useDispatch();
-
-  const follower = useSelector(selectContacts);
+  const operetion = useSelector(selectOperetion);
 
   return (
     <>
@@ -45,23 +45,33 @@ const Follower = ({ id, avatar, followers, tweets, isFollower }) => {
               variant="contained"
               onClick={() => {
                 if (isFollower) {
-                  dispatch(setFilter("all"));
                   dispatch(deleteFollower(id));
-                  const displayedItems = follower.filter(
-                    (item) => item.id !== id
-                  );
-                  dispatch(setDisplayedItems(displayedItems));
-                } else {
+                  // const displayedItems = follower.filter(
+                  //   (item) => item.id !== id
+                  // );
+                  // dispatch(setDisplayedItems(displayedItems));
                   dispatch(setFilter("all"));
+                } else {
                   dispatch(addFollower(id));
-                  const displayedItems = follower.filter(
-                    (item) => item.id !== id
-                  );
-                  dispatch(setDisplayedItems(displayedItems));
+                  // const displayedItems = follower.filter(
+                  //   (item) => item.id !== id
+                  // );
+                  // dispatch(setDisplayedItems(displayedItems));
+                  dispatch(setFilter("all"));
                 }
               }}
             >
-              {isFollower ? "Following" : "Follow"}
+              {operetion === id ? (
+                <RotatingLines
+                  strokeColor="#1565c0"
+                  strokeWidth="5"
+                  animationDuration="0.75"
+                  width="25"
+                  visible={true}
+                />
+              ) : (
+                <>{isFollower ? "Following" : "Follow"}</>
+              )}
             </FollowerBtn>
           </BtnWrapper>
         </FollowerCardBox>

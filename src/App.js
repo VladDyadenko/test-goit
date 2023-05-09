@@ -22,8 +22,7 @@ function App() {
 
   return (
     <>
-      {" "}
-      {operetion ? (
+      {operetion === "fatch" ? (
         <Loader />
       ) : (
         <Routes>

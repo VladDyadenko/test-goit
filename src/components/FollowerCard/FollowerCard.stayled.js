@@ -12,7 +12,7 @@ export const FollowerCardBox = styled(Box)`
   );
   box-shadow: -2.5777px 6.87386px 20.6216px rgba(0, 0, 0, 0.23);
   border-radius: 20px;
-  margin-top: 100px;
+  margin-top: 15px;
   margin-left: auto;
   margin-right: auto;
   padding-top: 20px;
@@ -97,13 +97,23 @@ export const Item = styled.li`
   padding-left: 0;
 `;
 export const UserContainer = styled.ul`
+  width: 100%;
   margin: 0;
   padding-left: 0;
   list-style: none;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 10px;
-  grid-row-gap: 1em;
+
+  @media screen and (min-width: 480px) and (max-width: 767px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 1em;
+  }
+  @media screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 1em;
+  }
 `;
 export const LoadButton = styled(Button)`
   margin: 15px auto;

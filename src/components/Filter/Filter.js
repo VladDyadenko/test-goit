@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "@mui/material";
 import { BsFillRewindFill } from "react-icons/bs";
 import {
   ButtonContainer,
+  ButtonSelect,
   Container,
   Text,
   Wrapper,
@@ -27,14 +27,12 @@ function Filter({ followers }) {
   const handleAllClick = () => {
     dispatch(setFilter("all"));
     const displayedItems = followers;
-
     dispatch(setDisplayedItems(displayedItems));
   };
 
   const handleFollowingsClick = () => {
     dispatch(setFilter("followings"));
     const displayedItems = followers.filter((item) => item.isFollower);
-
     dispatch(setDisplayedItems(displayedItems));
   };
 
@@ -46,9 +44,16 @@ function Filter({ followers }) {
   };
   return (
     <>
+      <WrapperBtn>
+        <ButtonContainer>
+          <ButtonSelect onClick={onGoHome} variant="contained">
+            <BsFillRewindFill style={{ marginRight: "10px" }} /> Back to Home
+          </ButtonSelect>
+        </ButtonContainer>
+      </WrapperBtn>
       <Wrapper>
         <Container>
-          <Button
+          <ButtonSelect
             onClick={handleAllClick}
             variant="contained"
             sx={{
@@ -57,43 +62,36 @@ function Filter({ followers }) {
             }}
           >
             All
-          </Button>
+          </ButtonSelect>
           <Text variant="h5" component="h3">
             {all}
           </Text>
         </Container>
         <Container>
-          <Button
+          <ButtonSelect
             onClick={handleFollowClick}
             variant="contained"
             sx={{ color: filter === "follow" ? "#00ff00" : "#fff" }}
           >
             Follow
-          </Button>
+          </ButtonSelect>
           <Text variant="h5" component="h3">
             {follow.length}
           </Text>
         </Container>
         <Container>
-          <Button
+          <ButtonSelect
             onClick={handleFollowingsClick}
             variant="contained"
             sx={{ color: filter === "followings" ? "#00ff00" : "#fff" }}
           >
             Followings
-          </Button>
+          </ButtonSelect>
           <Text variant="h5" component="h3">
             {followings.length}
           </Text>
         </Container>
       </Wrapper>
-      <WrapperBtn>
-        <ButtonContainer>
-          <Button onClick={onGoHome} variant="contained">
-            <BsFillRewindFill style={{ marginRight: "10px" }} /> Back to Home
-          </Button>
-        </ButtonContainer>
-      </WrapperBtn>
     </>
   );
 }

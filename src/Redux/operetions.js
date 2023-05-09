@@ -6,13 +6,13 @@ axios.defaults.baseURL = "https://645510a9f803f345763957ea.mockapi.io/follower";
 export const fetchContacts = createAsyncThunk(
   "follower/fetchAll",
   async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const follower = state.tweets.follower;
-    if (follower.length) {
-      return follower;
-    }
     try {
-      const response = await axios.get("/follower");
+      const response = await axios.get("/follower", {
+        params: {
+          page: 1,
+          limit: 3,
+        },
+      });
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -21,16 +21,17 @@ export const fetchContacts = createAsyncThunk(
 );
 export const addDisplayedItems = createAsyncThunk(
   "follower/addDisplayedItems",
-  async (_, { getState }) => {
+  async (currentPage, thunkAPI) => {
     try {
-      const { currentPage, itemsPerPage } = getState().follower;
-
-      const start = currentPage * itemsPerPage;
-      const end = start + itemsPerPage;
-      const response = await axios.get(`/follower?_start=${start}&_end=${end}`);
+      const response = await axios.get("/follower", {
+        params: {
+          page: currentPage,
+          limit: 3,
+        },
+      });
       return response.data;
-    } catch (error) {
-      return error.message;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );

@@ -4,10 +4,11 @@ const Loader = () => {
   return (
     <BoxLoader>
       <LoaderSpiner
+        strokeColor="grey"
+        strokeWidth="5"
+        animationDuration="0.75"
+        width="50"
         visible={true}
-        color="#006400"
-        ariaLabel="dna-loading"
-        wrapperClass="dna-wrapper"
       />
     </BoxLoader>
   );

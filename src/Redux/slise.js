@@ -14,7 +14,6 @@ const followerInitialState = {
     displayedItems: [],
     itemsPerPage: 3,
     currentPage: 1,
-    totalPages: 0,
     filter: "all",
   },
 };
@@ -37,34 +36,36 @@ const followerSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchContacts.pending, (state) => {
-        state.operetion = true;
+        state.follower.operetion = "fatch";
       })
       .addCase(fetchContacts.fulfilled, (state, { payload }) => {
-        state.operetion = false;
+        state.follower.operetion = false;
         state.error = null;
         state.follower.items = payload;
-        state.follower.totalPages = Math.ceil(
-          payload.length / state.follower.itemsPerPage
-        );
-        state.displayedItems = payload.slice(0, state.follower.itemsPerPage);
+        state.displayedItems = payload;
       })
       .addCase(fetchContacts.rejected, (state, { payload }) => {
-        state.operetion = false;
+        state.follower.operetion = false;
         state.error = payload;
       })
-      .addCase(addDisplayedItems.fulfilled, (state) => {
-        state.operetion = false;
-        const start = state.follower.currentPage * state.follower.itemsPerPage;
-        const end = start + state.follower.itemsPerPage;
-        const nextItems = state.follower.items.slice(start, end);
-        state.displayedItems = [...state.displayedItems, ...nextItems];
-        state.follower.currentPage += 1;
+      .addCase(addDisplayedItems.pending, (state) => {
+        state.follower.operetion = "addItems";
       })
-      .addCase(deleteFollower.pending, (state) => {
-        state.operetion = true;
+      .addCase(addDisplayedItems.fulfilled, (state, { meta, payload }) => {
+        state.follower.operetion = false;
+        state.follower.currentPage = meta.arg;
+        state.follower.items = [...state.follower.items, ...payload];
+        state.displayedItems = [...state.displayedItems, ...payload];
+      })
+      .addCase(addDisplayedItems.rejected, (state, { payload }) => {
+        state.follower.operetion = false;
+        state.follower.error = payload;
+      })
+      .addCase(deleteFollower.pending, (state, payload) => {
+        state.follower.operetion = `${payload.meta.arg}`;
       })
       .addCase(deleteFollower.fulfilled, (state, { meta: { arg } }) => {
-        state.operetion = false;
+        state.follower.operetion = false;
         const index = state.follower.items.findIndex((item) => item.id === arg);
         if (index >= 0) {
           state.follower.items[index].followers -= 1;
@@ -73,14 +74,14 @@ const followerSlice = createSlice({
         state.displayedItems = state.follower.items;
       })
       .addCase(deleteFollower.rejected, (state, { payload }) => {
-        state.operetion = false;
-        state.error = payload;
+        state.follower.operetion = false;
+        state.follower.error = payload;
       })
-      .addCase(addFollower.pending, (state) => {
-        state.operetion = true;
+      .addCase(addFollower.pending, (state, payload) => {
+        state.follower.operetion = `${payload.meta.arg}`;
       })
       .addCase(addFollower.fulfilled, (state, { meta: { arg } }) => {
-        state.operetion = false;
+        state.follower.operetion = false;
         const index = state.follower.items.findIndex((item) => item.id === arg);
         if (index >= 0) {
           state.follower.items[index].followers += 1;
@@ -89,8 +90,8 @@ const followerSlice = createSlice({
         state.displayedItems = state.follower.items;
       })
       .addCase(addFollower.rejected, (state, { payload }) => {
-        state.operetion = false;
-        state.error = payload;
+        state.follower.operetion = false;
+        state.follower.error = payload;
       });
   },
 });

@@ -2,15 +2,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { addDisplayedItems } from "../../Redux/operetions";
 import Follower from "./Follower";
 import { LoadButton, UserContainer } from "./FollowerCard.stayled";
-import { selectDisplayedItems } from "../../Redux/selectors";
+import { selectCurrentPage, selectDisplayedItems } from "../../Redux/selectors";
+import { setFilter } from "../../Redux/slise";
 
-const FollowerCard = ({ followers }) => {
+const FollowerCard = () => {
   const displayPage = useSelector(selectDisplayedItems);
-
+  const currentPage = useSelector(selectCurrentPage);
   const dispatch = useDispatch();
 
   const handleShowMore = () => {
-    dispatch(addDisplayedItems());
+    dispatch(addDisplayedItems(currentPage + 1));
+    dispatch(setFilter("all"));
   };
 
   return (
@@ -27,7 +29,7 @@ const FollowerCard = ({ followers }) => {
           />
         ))}
       </UserContainer>
-      {displayPage?.length < followers?.length && (
+      {displayPage?.length && (
         <LoadButton variant="contained" onClick={handleShowMore}>
           Load More
         </LoadButton>
